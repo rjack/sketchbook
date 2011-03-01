@@ -26,7 +26,7 @@ void draw () {
 
 
 void mouseClicked () {
-  color actor_color = color(int(random(0,255)), int(random(0, 255)), int(random(0, 255)), int(random(0, 100)));
+  color actor_color = color(int(random(0,255)), int(random(0, 255)), int(random(0, 255)), int(random(0, 255)));
   Actor actor = new Actor(mouseX, mouseY, int(random(50, 200)), actor_color);
   actors.add(actor);
   //println("New actor, " + actors.size() + " total");
