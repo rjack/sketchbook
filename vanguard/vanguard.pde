@@ -1,4 +1,5 @@
 ArrayList actors;
+Chronograph chrono;
 
 
 void setup () {
@@ -8,13 +9,15 @@ void setup () {
   noCursor();
   actors = new ArrayList();
   actors.add(new Player(mouseX, mouseY, 30, color(255,0,0,255)));
+  chrono = new Chronograph();
 }
 
 
 void draw () {
   background(0);
-  if (//TODO) {
+  if (chrono.partial() > 1000) {
     actors.add(createEnemy());
+    chrono.reset();
   }
   Iterator i = actors.iterator();
   while (i.hasNext()) {
@@ -38,4 +41,27 @@ Enemy createEnemy () {
                           int(random(-2, 2)),     // dx
                           int(random(1, 5)));    // dy
   return enemy;
+}
+
+
+class Chronograph {
+  private int partial[];
+
+  Chronograph () {
+    this.partial = new int[2];
+    this.reset();
+  }
+
+  int read () {
+    return this.partial[1] - this.partial[0];
+  }
+
+  int partial () {
+    this.partial[1] = millis();
+    return this.read();
+  }
+
+  void reset () {
+    this.partial[0] = millis();
+  }
 }
